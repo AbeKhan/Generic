@@ -10,7 +10,15 @@ public class GenericClass<T>
         list = new ArrayList<T>();
     }
 
-    public 
+    public void push(T type)
+    {
+        list.add(type);
+    }
+
+    public void pop(T type)
+    {
+        list.remove(list.size()-1);
+    }
 
 
 }
