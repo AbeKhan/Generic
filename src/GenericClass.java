@@ -15,10 +15,12 @@ public class GenericClass<T>
         list.add(type);
     }
 
-    public void pop(T type)
+    public void pop()
     {
         list.remove(list.size()-1);
     }
+
+
 
 
 }
