@@ -20,6 +20,10 @@ public class GenericClass<T>
         list.remove(list.size()-1);
     }
 
+    public void peek()
+    {
+        System.out.println(list.get(list.size()-1));
+    }
 
 
 
