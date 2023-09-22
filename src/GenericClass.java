@@ -25,6 +25,17 @@ public class GenericClass<T>
         System.out.println(list.get(list.size()-1));
     }
 
+    public boolean isEmpty()
+    {
+        if (list.isEmpty())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 
 }
