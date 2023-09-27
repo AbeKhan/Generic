@@ -1,66 +1,52 @@
 import java.util.ArrayList;
-//import java.util.Stack;
 
-public class GenericClass<T>
-{
+public class GenericClass<T> {
     T type;
     private ArrayList<T> list;
 
-    public GenericClass()
-    {
+    public GenericClass() {
         list = new ArrayList<T>();
     }
 
-    public void push(T type)
-    {
+    public void push(T type) {
         list.add(type);
     }
 
-    public void pop()
-    {
-        list.remove(list.size()-1);
+    public void pop() {
+        list.remove(list.size() - 1);
     }
 
-    public void peek()
-    {
-       if (!list.isEmpty()) 
-       {
+    public void peek() {
+        if (!list.isEmpty()) {
             System.out.println(list.get(list.size() - 1));
-        } 
-        else 
-        {
+        } else {
             System.out.println("The stack is empty");
-        }     
+        }
     }
 
-    public boolean isEmpty()
-    {
-       return list.isEmpty();
+    public boolean isEmpty() {
+        return list.isEmpty();
     }
 
-    public void  evaluate(ArrayList<String> inputList)
-    {
-        ArrayList<Integer> hold = new ArrayList<Integer>();
+    public void evaluate(String input) {
+       // GenericClass<Integer> hold = new GenericClass<Integer>();
+       ArrayList<Integer> hold = new ArrayList<Integer>();
         int holderA;
         int holderB;
 
-       
-            for(String item: inputList )
-            {
-                if(isInteger(item))
-                {
-                    hold.add(Integer.parseInt(item));
-                }
-                else if (isOperator(item))
-                {
-                    holderB = hold.get(hold.size()-1);
-                    hold.remove(hold.size()-1);
-                    holderA = hold.get(hold.size()-1);
-                    hold.remove(hold.size()-1);
+        String[] tokens = input.split(" "); // Split the input into tokens
 
-                    int result;
-                switch (item) 
-                {
+        for (String token : tokens) {
+            if (isInteger(token)) {
+                hold.add(Integer.parseInt(token));
+            } else if (isOperator(token)) {
+                holderB = hold.get(hold.size() - 1);
+                hold.remove(hold.size() - 1);
+                holderA = hold.get(hold.size() - 1);
+                hold.remove(hold.size() - 1);
+
+                int result;
+                switch (token) {
                     case "+":
                         result = holderA + holderB;
                         break;
@@ -74,31 +60,25 @@ public class GenericClass<T>
                         result = holderA / holderB;
                         break;
                     default:
-                        throw new IllegalArgumentException("Invalid operator: " + item);
-                    
+                        throw new IllegalArgumentException("Invalid operator: " + token);
                 }
                 hold.add(result);
-             }
-            
+               // list.push((String) result)
             }
-            System.out.println(hold.get(0));
         }
+        System.out.println(hold.get(0));
+    }
 
-    public boolean isInteger(String num)
-    {
-        try
-        {
+    public boolean isInteger(String num) {
+        try {
             Integer.parseInt(num);
             return true;
-        }
-        catch(Exception e) 
-        {
+        } catch (NumberFormatException e) {
             return false;
         }
     }
 
-    public boolean isOperator(String something)
-    {
+    public boolean isOperator(String something) {
         return something.equals("+") || something.equals("-") || something.equals("*") || something.equals("/");
     }
 }
